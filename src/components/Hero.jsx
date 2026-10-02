@@ -7,6 +7,16 @@ import heroBackground from "../assets/hero-bg.mp4";
 
 import "./hero.css";
 
+/* =====================================================
+   GITHUB PAGES BASE PATH
+   Aman untuk:
+   - localhost
+   - npm run dev
+   - GitHub Pages /Portofolio/
+===================================================== */
+
+const BASE = import.meta.env.BASE_URL;
+
 export default function Hero() {
   /* =====================================================
      PROFILE LENS
@@ -17,11 +27,10 @@ export default function Hero() {
 
   const [lensActive, setLensActive] = useState(false);
 
-
   /* =====================================================
      UPDATE LENS POSITION
      OPTIMIZED
-     
+
      Tidak menggunakan setState untuk posisi lens.
      CSS variable diubah langsung sehingga Hero tidak
      melakukan re-render setiap mouse bergerak.
@@ -45,7 +54,9 @@ export default function Hero() {
       let y =
         ((event.clientY - rect.top) / rect.height) * 100;
 
-      /* Batasi lens agar tetap di dalam frame */
+      /* =================================================
+         BATASI LENS AGAR TETAP DI DALAM FRAME
+      ================================================= */
 
       const lensSize = 10;
 
@@ -59,7 +70,9 @@ export default function Hero() {
         Math.min(100 - lensSize, y)
       );
 
-      /* Update CSS langsung */
+      /* =================================================
+         UPDATE CSS VARIABLE LANGSUNG
+      ================================================= */
 
       frame.style.setProperty(
         "--lens-x",
@@ -73,7 +86,6 @@ export default function Hero() {
     });
   };
 
-
   /* =====================================================
      POINTER ENTER
   ===================================================== */
@@ -81,10 +93,10 @@ export default function Hero() {
   const handlePointerEnter = (event) => {
     if (event.pointerType === "mouse") {
       setLensActive(true);
+
       updateLensPosition(event);
     }
   };
-
 
   /* =====================================================
      POINTER MOVE
@@ -97,7 +109,6 @@ export default function Hero() {
       setLensActive(true);
     }
   };
-
 
   /* =====================================================
      POINTER DOWN
@@ -120,7 +131,6 @@ export default function Hero() {
     setLensActive(true);
   };
 
-
   /* =====================================================
      POINTER UP
   ===================================================== */
@@ -141,7 +151,6 @@ export default function Hero() {
     }
   };
 
-
   /* =====================================================
      POINTER CANCEL
   ===================================================== */
@@ -149,7 +158,6 @@ export default function Hero() {
   const handlePointerCancel = () => {
     setLensActive(false);
   };
-
 
   /* =====================================================
      POINTER LEAVE
@@ -160,7 +168,6 @@ export default function Hero() {
       setLensActive(false);
     }
   };
-
 
   /* =====================================================
      CLEANUP ANIMATION FRAME
@@ -174,13 +181,19 @@ export default function Hero() {
     }
   };
 
+  /* =====================================================
+     RENDER
+  ===================================================== */
 
   return (
-    <section className="hero" id="home">
+    <section
+      className="hero"
+      id="home"
+    >
 
-      {/* =====================================================
+      {/* =================================================
           VIDEO BACKGROUND
-      ===================================================== */}
+      ================================================= */}
 
       <div className="hero-video-bg">
 
@@ -195,10 +208,9 @@ export default function Hero() {
 
       </div>
 
-
-      {/* =====================================================
+      {/* =================================================
           VIDEO READABILITY
-      ===================================================== */}
+      ================================================= */}
 
       <div className="video-color-layer" />
 
@@ -206,10 +218,9 @@ export default function Hero() {
 
       <div className="video-bottom-readable" />
 
-
-      {/* =====================================================
+      {/* =================================================
           ATMOSPHERE
-      ===================================================== */}
+      ================================================= */}
 
       <div className="hero-glow hero-glow-left" />
 
@@ -223,10 +234,9 @@ export default function Hero() {
 
       <div className="hero-noise" />
 
-
-      {/* =====================================================
+      {/* =================================================
           TOP LINE
-      ===================================================== */}
+      ================================================= */}
 
       <div className="hero-top-line">
 
@@ -236,10 +246,9 @@ export default function Hero() {
 
       </div>
 
-
-      {/* =====================================================
+      {/* =================================================
           LEFT CONTENT
-      ===================================================== */}
+      ================================================= */}
 
       <motion.div
         className="hero-content"
@@ -274,7 +283,6 @@ export default function Hero() {
 
         </div>
 
-
         {/* =================================================
             HELLO
         ================================================= */}
@@ -282,7 +290,6 @@ export default function Hero() {
         <p className="hero-small">
           HELLO, I'M
         </p>
-
 
         {/* =================================================
             NAME
@@ -304,7 +311,6 @@ export default function Hero() {
 
         </h1>
 
-
         {/* =================================================
             NAME UNDERLINE
         ================================================= */}
@@ -318,7 +324,6 @@ export default function Hero() {
           <span className="name-decoration-dot" />
 
         </div>
-
 
         {/* =================================================
             SPECIALTIES
@@ -356,7 +361,6 @@ export default function Hero() {
 
         </div>
 
-
         {/* =================================================
             DESCRIPTION
         ================================================= */}
@@ -375,14 +379,15 @@ export default function Hero() {
 
         </p>
 
-
         {/* =================================================
             BUTTONS
         ================================================= */}
 
         <div className="hero-buttons">
 
-          {/* PROJECT */}
+          {/* =================================================
+              PROJECT
+          ================================================= */}
 
           <a
             href="#projects"
@@ -399,11 +404,12 @@ export default function Hero() {
 
           </a>
 
-
-          {/* CV */}
+          {/* =================================================
+              CV
+          ================================================= */}
 
           <a
-            href="/CV.pdf"
+            href={`${BASE}CV.pdf`}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-secondary"
@@ -420,7 +426,6 @@ export default function Hero() {
           </a>
 
         </div>
-
 
         {/* =================================================
             CORE SKILLS
@@ -446,7 +451,6 @@ export default function Hero() {
 
         </div>
 
-
         {/* =================================================
             STATS
         ================================================= */}
@@ -465,9 +469,7 @@ export default function Hero() {
 
           </div>
 
-
           <div className="stat-divider" />
-
 
           <div className="stat">
 
@@ -481,9 +483,7 @@ export default function Hero() {
 
           </div>
 
-
           <div className="stat-divider" />
-
 
           <div className="stat">
 
@@ -500,7 +500,6 @@ export default function Hero() {
         </div>
 
       </motion.div>
-
 
       {/* =====================================================
           RIGHT VISUAL
@@ -538,7 +537,6 @@ export default function Hero() {
 
         <div className="profile-halo halo-three" />
 
-
         {/* =================================================
             PROFILE FRAME
         ================================================= */}
@@ -572,7 +570,6 @@ export default function Hero() {
 
           <div className="profile-glow" />
 
-
           {/* =================================================
               IMAGE UTAMA
           ================================================= */}
@@ -583,7 +580,6 @@ export default function Hero() {
             className="profile-image"
             draggable="false"
           />
-
 
           {/* =================================================
               IMAGE REVEAL
@@ -597,13 +593,11 @@ export default function Hero() {
             draggable="false"
           />
 
-
           {/* =================================================
               LENS CIRCLE
           ================================================= */}
 
           <div className="profile-lens" />
-
 
           {/* =================================================
               FRAME CORNERS
@@ -616,7 +610,6 @@ export default function Hero() {
           <div className="profile-corner corner-three" />
 
           <div className="profile-corner corner-four" />
-
 
           {/* =================================================
               TECH BAR
@@ -633,7 +626,6 @@ export default function Hero() {
           </div>
 
         </div>
-
 
         {/* =================================================
             FLOATING TOP CARD
@@ -671,7 +663,6 @@ export default function Hero() {
 
         </motion.div>
 
-
         {/* =================================================
             FLOATING BOTTOM CARD
         ================================================= */}
@@ -708,7 +699,6 @@ export default function Hero() {
 
         </motion.div>
 
-
         {/* =================================================
             SYSTEM STATUS
         ================================================= */}
@@ -729,7 +719,6 @@ export default function Hero() {
 
           </div>
 
-
           <div className="system-bars">
 
             <i />
@@ -741,7 +730,6 @@ export default function Hero() {
           </div>
 
         </div>
-
 
         {/* =================================================
             VISUAL LABEL
@@ -758,7 +746,6 @@ export default function Hero() {
         </div>
 
       </motion.div>
-
 
       {/* =====================================================
           SCROLL INDICATOR
