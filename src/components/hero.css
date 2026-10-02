@@ -1975,305 +1975,6 @@
 }
 
 
-/* =========================================================
-   PROFILE LENS REVEAL
-========================================================= */
-
-.profile-frame {
-  --lens-x: 50%;
-  --lens-y: 50%;
-  --lens-size: 85px;
-
-  touch-action: none;
-
-  cursor:
-    crosshair;
-
-  overflow:
-    hidden;
-}
-
-
-/* =========================================================
-   IMAGE 2
-========================================================= */
-
-.profile-image-reveal {
-
-  position:
-    absolute;
-
-  inset:
-    5px;
-
-  width:
-    calc(100% - 10px);
-
-  height:
-    calc(100% - 10px);
-
-  object-fit:
-    cover;
-
-  object-position:
-    center;
-
-  z-index:
-    3;
-
-  pointer-events:
-    none;
-
-  /*
-    Lingkaran tetap sama.
-  */
-
-  clip-path:
-    circle(
-      var(--lens-size)
-      at
-      var(--lens-x)
-      var(--lens-y)
-    );
-
-  opacity:
-    0;
-
-  transition:
-    opacity 0.12s ease;
-
-  filter:
-    saturate(1.06)
-    contrast(1.04);
-
-  /*
-    Posisi memang berubah terus,
-    jadi browser diberi tahu.
-  */
-
-  will-change:
-    clip-path,
-    opacity;
-
-  backface-visibility:
-    hidden;
-}
-
-
-/* =========================================================
-   LENS ACTIVE
-========================================================= */
-
-.profile-frame.lens-active
-.profile-image-reveal {
-  opacity:
-    1;
-}
-
-
-/* =========================================================
-   LENS CIRCLE
-========================================================= */
-
-.profile-lens {
-
-  position:
-    absolute;
-
-  left:
-    var(--lens-x);
-
-  top:
-    var(--lens-y);
-
-  width:
-    calc(var(--lens-size) * 2);
-
-  height:
-    calc(var(--lens-size) * 2);
-
-  transform:
-    translate(-50%, -50%);
-
-  z-index:
-    7;
-
-  pointer-events:
-    none;
-
-  border-radius:
-    50%;
-
-  border:
-    2px solid rgba(0, 238, 255, 0.95);
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(0, 238, 255, 0.05),
-      transparent 65%
-    );
-
-  box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.18),
-    0 0 9px rgba(0, 238, 255, 0.7),
-    0 0 18px rgba(0, 210, 255, 0.32);
-
-  opacity:
-    0;
-
-  transition:
-    opacity 0.12s ease;
-
-  will-change:
-    left,
-    top,
-    opacity;
-}
-
-
-/* =========================================================
-   LENS ACTIVE
-========================================================= */
-
-.profile-frame.lens-active
-.profile-lens {
-  opacity:
-    1;
-}
-
-
-/* =========================================================
-   LENS INNER RING
-========================================================= */
-
-.profile-lens::before {
-
-  content:
-    "";
-
-  position:
-    absolute;
-
-  inset:
-    5px;
-
-  border-radius:
-    50%;
-
-  border:
-    1px solid rgba(255, 255, 255, 0.4);
-
-  box-shadow:
-    inset 0 0 9px rgba(0, 230, 255, 0.14);
-
-  opacity:
-    0.8;
-}
-
-
-/* =========================================================
-   LENS CROSSHAIR
-========================================================= */
-
-.profile-lens::after {
-
-  content:
-    "";
-
-  position:
-    absolute;
-
-  left:
-    50%;
-
-  top:
-    50%;
-
-  width:
-    8px;
-
-  height:
-    8px;
-
-  transform:
-    translate(-50%, -50%);
-
-  border-radius:
-    50%;
-
-  background:
-    #00eaff;
-
-  box-shadow:
-    0 0 6px #00eaff,
-    0 0 12px rgba(0, 234, 255, 0.65);
-
-  opacity:
-    0.9;
-}
-
-
-/* =========================================================
-   LENS SIZE DESKTOP
-========================================================= */
-
-@media (min-width: 901px) {
-
-  .profile-frame {
-    --lens-size:
-      90px;
-  }
-
-}
-
-
-/* =========================================================
-   LENS SIZE TABLET
-========================================================= */
-
-@media (max-width: 900px) {
-
-  .profile-frame {
-    --lens-size:
-      82px;
-  }
-
-}
-
-
-/* =========================================================
-   LENS SIZE MOBILE
-========================================================= */
-
-@media (max-width: 600px) {
-
-  .profile-frame {
-    --lens-size:
-      68px;
-  }
-
-  .profile-lens {
-    border-width:
-      1.5px;
-  }
-
-}
-
-
-/* =========================================================
-   SMALL MOBILE
-========================================================= */
-
-@media (max-width: 420px) {
-
-  .profile-frame {
-    --lens-size:
-      60px;
-  }
-
-}
-
 
 /* =========================================================
    1400 PX
@@ -2878,4 +2579,488 @@
 
   opacity:
     1 !important;
+}
+
+/* =========================================================
+   FULL IMAGE SCANNER
+   FOTO 1 → FOTO 2
+   SCAN DARI BAWAH KE ATAS
+========================================================= */
+
+/* =========================================================
+   PROFILE FRAME
+========================================================= */
+
+.profile-frame {
+
+  position:
+    relative;
+
+  overflow:
+    hidden;
+
+  isolation:
+    isolate;
+
+  touch-action:
+    auto;
+
+  cursor:
+    default;
+}
+
+
+/* =========================================================
+   FOTO UTAMA / FOTO 1
+========================================================= */
+
+.profile-image-base {
+
+  position:
+    absolute;
+
+  inset:
+    5px;
+
+  width:
+    calc(100% - 10px);
+
+  height:
+    calc(100% - 10px);
+
+  object-fit:
+    cover;
+
+  object-position:
+    center;
+
+  z-index:
+    1;
+
+  display:
+    block;
+
+  filter:
+    saturate(1.04)
+    contrast(1.03);
+
+  backface-visibility:
+    hidden;
+}
+
+
+/* =========================================================
+   LAYER FOTO 2
+   UKURAN DAN POSISI SAMA PERSIS DENGAN FOTO 1
+========================================================= */
+
+.profile-scan-layer {
+
+  position:
+    absolute;
+
+  inset:
+    5px;
+
+  z-index:
+    3;
+
+  width:
+    calc(100% - 10px);
+
+  height:
+    calc(100% - 10px);
+
+  overflow:
+    hidden;
+
+  pointer-events:
+    none;
+
+  /*
+    FOTO 2 DIMULAI DARI BAWAH.
+    HANYA BAGIAN YANG SUDAH TER-SCAN
+    YANG AKAN TERLIHAT.
+  */
+
+  clip-path:
+    inset(
+      100% 0 0 0
+    );
+
+  -webkit-clip-path:
+    inset(
+      100% 0 0 0
+    );
+
+  transition:
+    clip-path 2.8s
+    cubic-bezier(0.22, 1, 0.36, 1);
+
+  will-change:
+    clip-path;
+
+  backface-visibility:
+    hidden;
+}
+
+
+/* =========================================================
+   FOTO 2
+   DIAM TOTAL
+========================================================= */
+
+.profile-image-second {
+
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  width:
+    100%;
+
+  height:
+    100%;
+
+  object-fit:
+    cover;
+
+  object-position:
+    center;
+
+  display:
+    block;
+
+  filter:
+    saturate(1.06)
+    contrast(1.04);
+
+  pointer-events:
+    none;
+
+  backface-visibility:
+    hidden;
+}
+
+
+/* =========================================================
+   SCAN FOTO 1 → FOTO 2
+========================================================= */
+
+.profile-scan-layer.scan-show-second {
+
+  clip-path:
+    inset(
+      0 0 0 0
+    );
+
+  -webkit-clip-path:
+    inset(
+      0 0 0 0
+    );
+}
+
+
+/* =========================================================
+   SCANNER BAR
+   UKURANNYA SELEBAR FOTO
+========================================================= */
+
+.profile-scanner {
+
+  position:
+    absolute;
+
+  left:
+    5px;
+
+  right:
+    5px;
+
+  height:
+    14px;
+
+  bottom:
+    5px;
+
+  z-index:
+    6;
+
+  pointer-events:
+    none;
+
+  opacity:
+    0;
+
+  transform:
+    translateY(0);
+
+  will-change:
+    transform,
+    opacity;
+}
+
+
+/* =========================================================
+   SCANNER ACTIVE
+========================================================= */
+
+.profile-scanner.scanner-running {
+
+  opacity:
+    1;
+
+  animation:
+    profileScannerUp 2.8s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
+}
+
+
+/* =========================================================
+   SCANNER GERAK DARI BAWAH → ATAS
+========================================================= */
+
+@keyframes profileScannerUp {
+
+  0% {
+
+    transform:
+      translateY(0);
+
+    opacity:
+      0;
+  }
+
+  5% {
+
+    opacity:
+      1;
+  }
+
+  90% {
+
+    opacity:
+      1;
+  }
+
+  100% {
+
+    transform:
+      translateY(
+        calc(-100% + 14px)
+      );
+
+    opacity:
+      0;
+  }
+
+}
+
+
+/* =========================================================
+   GARIS SCANNER UTAMA
+========================================================= */
+
+.scanner-line {
+
+  position:
+    absolute;
+
+  left:
+    0;
+
+  right:
+    0;
+
+  top:
+    50%;
+
+  height:
+    2px;
+
+  transform:
+    translateY(-50%);
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.7) 8%,
+      #ffffff 25%,
+      #00eaff 50%,
+      #ffffff 75%,
+      rgba(255, 255, 255, 0.7) 92%,
+      transparent 100%
+    );
+
+  box-shadow:
+    0 0 5px #00eaff,
+    0 0 12px rgba(0, 234, 255, 0.9),
+    0 0 25px rgba(0, 234, 255, 0.55);
+
+}
+
+
+/* =========================================================
+   SCANNER GLOW
+========================================================= */
+
+.scanner-glow {
+
+  position:
+    absolute;
+
+  left:
+    -20px;
+
+  right:
+    -20px;
+
+  top:
+    -20px;
+
+  bottom:
+    -20px;
+
+  pointer-events:
+    none;
+
+  background:
+    linear-gradient(
+      to bottom,
+      transparent,
+      rgba(0, 234, 255, 0.18),
+      rgba(70, 120, 255, 0.20),
+      rgba(0, 234, 255, 0.18),
+      transparent
+    );
+
+  filter:
+    blur(10px);
+
+  opacity:
+    0.85;
+}
+
+
+/* =========================================================
+   SCANNER BORDER
+========================================================= */
+
+.scanner-border {
+
+  position:
+    absolute;
+
+  inset:
+    -1px 0;
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.75);
+
+  border-bottom:
+    1px solid rgba(0, 234, 255, 0.55);
+
+  box-shadow:
+    0 0 8px rgba(0, 234, 255, 0.45);
+
+}
+
+
+/* =========================================================
+   SAAT SCANNER SELESAI
+   FOTO 2 TETAP TAMPIL
+========================================================= */
+
+.profile-scan-layer.scan-show-second {
+
+  clip-path:
+    inset(0 0 0 0);
+
+  -webkit-clip-path:
+    inset(0 0 0 0);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .profile-scanner {
+
+    left:
+      5px;
+
+    right:
+      5px;
+
+    height:
+      11px;
+  }
+
+  @keyframes profileScannerUp {
+
+    0% {
+
+      transform:
+        translateY(0);
+
+      opacity:
+        0;
+    }
+
+    5% {
+
+      opacity:
+        1;
+    }
+
+    90% {
+
+      opacity:
+        1;
+    }
+
+    100% {
+
+      transform:
+        translateY(
+          calc(-100% + 11px)
+        );
+
+      opacity:
+        0;
+    }
+
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .profile-scanner {
+
+    animation:
+      none !important;
+
+    opacity:
+      0 !important;
+  }
+
+  .profile-scan-layer {
+
+    transition:
+      none !important;
+  }
+
 }

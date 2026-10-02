@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 import profileImage from "../assets/hero.png";
 import profileImage2 from "../assets/hero-2.png";
@@ -9,177 +9,107 @@ import "./hero.css";
 
 /* =====================================================
    GITHUB PAGES BASE PATH
-   Aman untuk:
-   - localhost
-   - npm run dev
-   - GitHub Pages /Portofolio/
 ===================================================== */
 
 const BASE = import.meta.env.BASE_URL;
 
 export default function Hero() {
-  /* =====================================================
-     PROFILE LENS
-  ===================================================== */
-
-  const profileFrameRef = useRef(null);
-  const lensFrameRef = useRef(null);
-
-  const [lensActive, setLensActive] = useState(false);
 
   /* =====================================================
-     UPDATE LENS POSITION
-     OPTIMIZED
+     IMAGE SCANNER STATE
 
-     Tidak menggunakan setState untuk posisi lens.
-     CSS variable diubah langsung sehingga Hero tidak
-     melakukan re-render setiap mouse bergerak.
+     false = FOTO 1
+     true  = FOTO 2
+
+     Scanner bergerak dari bawah ke atas.
   ===================================================== */
 
-  const updateLensPosition = (event) => {
-    const frame = profileFrameRef.current;
+  const [showSecondImage, setShowSecondImage] =
+    useState(false);
 
-    if (!frame) return;
+  const [scannerKey, setScannerKey] =
+    useState(0);
 
-    if (lensFrameRef.current) {
-      cancelAnimationFrame(lensFrameRef.current);
-    }
-
-    lensFrameRef.current = requestAnimationFrame(() => {
-      const rect = frame.getBoundingClientRect();
-
-      let x =
-        ((event.clientX - rect.left) / rect.width) * 100;
-
-      let y =
-        ((event.clientY - rect.top) / rect.height) * 100;
-
-      /* =================================================
-         BATASI LENS AGAR TETAP DI DALAM FRAME
-      ================================================= */
-
-      const lensSize = 10;
-
-      x = Math.max(
-        lensSize,
-        Math.min(100 - lensSize, x)
-      );
-
-      y = Math.max(
-        lensSize,
-        Math.min(100 - lensSize, y)
-      );
-
-      /* =================================================
-         UPDATE CSS VARIABLE LANGSUNG
-      ================================================= */
-
-      frame.style.setProperty(
-        "--lens-x",
-        `${x}%`
-      );
-
-      frame.style.setProperty(
-        "--lens-y",
-        `${y}%`
-      );
-    });
-  };
+  const [scannerRunning, setScannerRunning] =
+    useState(true);
 
   /* =====================================================
-     POINTER ENTER
+     LOOP SCANNER
+
+     1. Foto 1
+     2. Scanner naik
+     3. Foto 2 terbuka
+     4. Tunggu 3 detik
+     5. Scanner turun ke bawah
+     6. Scanner naik lagi
+     7. Foto 1 terbuka kembali
+     8. Ulang
   ===================================================== */
 
-  const handlePointerEnter = (event) => {
-    if (event.pointerType === "mouse") {
-      setLensActive(true);
+  useEffect(() => {
 
-      updateLensPosition(event);
-    }
-  };
+    let cancelled = false;
 
-  /* =====================================================
-     POINTER MOVE
-  ===================================================== */
+    const runScanner = async () => {
 
-  const handlePointerMove = (event) => {
-    updateLensPosition(event);
+      while (!cancelled) {
 
-    if (!lensActive) {
-      setLensActive(true);
-    }
-  };
+        /* =============================================
+           SCANNER AKTIF
+        ============================================= */
 
-  /* =====================================================
-     POINTER DOWN
-     TOUCHSCREEN
-  ===================================================== */
+        setScannerRunning(true);
 
-  const handlePointerDown = (event) => {
-    const frame = profileFrameRef.current;
+        /* =============================================
+           TUNGGU SCANNER SELESAI NAIK
+        ============================================= */
 
-    if (frame) {
-      try {
-        frame.setPointerCapture(event.pointerId);
-      } catch {
-        // Browser tertentu tidak membutuhkan pointer capture
+        await new Promise((resolve) => {
+          setTimeout(resolve, 2800);
+        });
+
+        if (cancelled) return;
+
+        /* =============================================
+           FOTO BERGANTI
+        ============================================= */
+
+        setShowSecondImage((current) => !current);
+
+        /* =============================================
+           SCANNER SELESAI
+        ============================================= */
+
+        setScannerRunning(false);
+
+        /* =============================================
+           TUNGGU 3 DETIK
+        ============================================= */
+
+        await new Promise((resolve) => {
+          setTimeout(resolve, 3000);
+        });
+
+        if (cancelled) return;
+
+        /* =============================================
+           RESET SCANNER
+           KEMBALI KE BAWAH
+        ============================================= */
+
+        setScannerKey((current) => current + 1);
+
       }
-    }
 
-    updateLensPosition(event);
+    };
 
-    setLensActive(true);
-  };
+    runScanner();
 
-  /* =====================================================
-     POINTER UP
-  ===================================================== */
+    return () => {
+      cancelled = true;
+    };
 
-  const handlePointerUp = (event) => {
-    if (event.pointerType !== "mouse") {
-      setLensActive(false);
-    }
-
-    const frame = profileFrameRef.current;
-
-    if (frame) {
-      try {
-        frame.releasePointerCapture(event.pointerId);
-      } catch {
-        // Aman jika browser tidak mendukung
-      }
-    }
-  };
-
-  /* =====================================================
-     POINTER CANCEL
-  ===================================================== */
-
-  const handlePointerCancel = () => {
-    setLensActive(false);
-  };
-
-  /* =====================================================
-     POINTER LEAVE
-  ===================================================== */
-
-  const handlePointerLeave = (event) => {
-    if (event.pointerType === "mouse") {
-      setLensActive(false);
-    }
-  };
-
-  /* =====================================================
-     CLEANUP ANIMATION FRAME
-  ===================================================== */
-
-  const cleanupLens = () => {
-    if (lensFrameRef.current) {
-      cancelAnimationFrame(lensFrameRef.current);
-
-      lensFrameRef.current = null;
-    }
-  };
+  }, []);
 
   /* =====================================================
      RENDER
@@ -385,10 +315,6 @@ export default function Hero() {
 
         <div className="hero-buttons">
 
-          {/* =================================================
-              PROJECT
-          ================================================= */}
-
           <a
             href="#projects"
             className="btn-primary"
@@ -403,10 +329,6 @@ export default function Hero() {
             </b>
 
           </a>
-
-          {/* =================================================
-              CV
-          ================================================= */}
 
           <a
             href={`${BASE}CV.pdf`}
@@ -541,28 +463,7 @@ export default function Hero() {
             PROFILE FRAME
         ================================================= */}
 
-        <div
-          ref={profileFrameRef}
-
-          className={`profile-frame ${
-            lensActive
-              ? "lens-active"
-              : ""
-          }`}
-
-          style={{
-            "--lens-x": "50%",
-            "--lens-y": "50%",
-          }}
-
-          onPointerEnter={handlePointerEnter}
-          onPointerMove={handlePointerMove}
-          onPointerLeave={handlePointerLeave}
-          onPointerDown={handlePointerDown}
-          onPointerUp={handlePointerUp}
-          onPointerCancel={handlePointerCancel}
-          onLostPointerCapture={cleanupLens}
-        >
+        <div className="profile-frame">
 
           {/* =================================================
               PROFILE GLOW
@@ -571,33 +472,91 @@ export default function Hero() {
           <div className="profile-glow" />
 
           {/* =================================================
-              IMAGE UTAMA
+              FOTO 1
+              SELALU DIAM DI BAWAH
           ================================================= */}
 
           <img
             src={profileImage}
             alt="Muhammad Ichwan Dawan Angga Ramadhan"
-            className="profile-image"
+            className="profile-image profile-image-base"
             draggable="false"
           />
 
           {/* =================================================
-              IMAGE REVEAL
+              FOTO 2
+              SELALU DIAM DI POSISI YANG SAMA
+
+              Yang bergerak hanya MASK / SCANNER.
           ================================================= */}
 
-          <img
-            src={profileImage2}
-            alt=""
-            aria-hidden="true"
-            className="profile-image-reveal"
-            draggable="false"
-          />
+          <div
+            className={`profile-scan-layer ${
+              showSecondImage
+                ? "scan-show-second"
+                : "scan-show-first"
+            }`}
+          >
+
+            <img
+              src={profileImage2}
+              alt=""
+              aria-hidden="true"
+              className="profile-image-second"
+              draggable="false"
+            />
+
+          </div>
 
           {/* =================================================
-              LENS CIRCLE
+              SCANNER FRAME
+
+              UKURAN = SAMA DENGAN FOTO
           ================================================= */}
 
-          <div className="profile-lens" />
+          <motion.div
+            key={scannerKey}
+            className={`profile-scanner ${
+              scannerRunning
+                ? "scanner-running"
+                : ""
+            }`}
+
+            initial={{
+              clipPath:
+                "inset(100% 0% 0% 0%)",
+            }}
+
+            animate={{
+              clipPath:
+                "inset(0% 0% 0% 0%)",
+            }}
+
+            transition={{
+              duration: 2.8,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
+
+            {/* =========================================
+                SCANNER BORDER
+            ========================================= */}
+
+            <div className="scanner-border" />
+
+            {/* =========================================
+                SCANNER LIGHT
+            ========================================= */}
+
+            <div className="scanner-line" />
+
+            {/* =========================================
+                SCANNER GLOW
+            ========================================= */}
+
+            <div className="scanner-glow" />
+
+          </motion.div>
 
           {/* =================================================
               FRAME CORNERS
