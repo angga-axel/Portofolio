@@ -1,0 +1,2881 @@
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+
+  overflow: hidden;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.08fr)
+    minmax(430px, 0.92fr);
+
+  align-items: center;
+
+  gap: 30px;
+
+  padding:
+    120px 7vw
+    90px;
+
+  background: #02070c;
+
+  isolation: isolate;
+}
+
+
+/* =========================================================
+   VIDEO BACKGROUND
+========================================================= */
+
+.hero-video-bg {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: -20;
+
+  overflow: hidden;
+
+  background: #02070c;
+}
+
+.hero-video-bg video {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  object-position: center;
+
+  display: block;
+
+  /*
+    Filter dibuat lebih ringan.
+    Tetap memberikan kontras dan warna.
+  */
+
+  filter:
+    brightness(0.94)
+    contrast(1.05)
+    saturate(1.08);
+
+  transform: translateZ(0) scale(1.01);
+
+  will-change: transform;
+}
+
+
+/* =========================================================
+   VIDEO COLOR
+========================================================= */
+
+.video-color-layer {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: -18;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 10, 18, 0.28) 0%,
+      rgba(0, 10, 18, 0.05) 50%,
+      rgba(0, 20, 35, 0.16) 100%
+    );
+}
+
+
+/* =========================================================
+   LEFT READABILITY
+========================================================= */
+
+.video-left-readable {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  bottom: 0;
+
+  width: 62%;
+
+  z-index: -17;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 5, 11, 0.70) 0%,
+      rgba(0, 6, 13, 0.48) 42%,
+      rgba(0, 8, 15, 0.15) 78%,
+      transparent 100%
+    );
+}
+
+
+/* =========================================================
+   BOTTOM READABILITY
+========================================================= */
+
+.video-bottom-readable {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 28%;
+
+  z-index: -16;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(0, 4, 9, 0.55),
+      transparent
+    );
+}
+
+
+/* =========================================================
+   GLOW
+========================================================= */
+
+.hero-glow {
+  position: absolute;
+
+  pointer-events: none;
+
+  border-radius: 50%;
+
+  /*
+    Sebelumnya 100px.
+    45px jauh lebih ringan tetapi masih terlihat glow.
+  */
+
+  filter: blur(45px);
+
+  z-index: -10;
+
+  transform: translateZ(0);
+}
+
+.hero-glow-left {
+  width: 400px;
+  height: 400px;
+
+  left: -180px;
+  top: 25%;
+
+  background:
+    rgba(0, 119, 255, 0.11);
+}
+
+.hero-glow-right {
+  width: 520px;
+  height: 520px;
+
+  right: -220px;
+  top: 15%;
+
+  background:
+    rgba(0, 220, 255, 0.10);
+}
+
+.hero-glow-center {
+  width: 450px;
+  height: 450px;
+
+  left: 48%;
+  top: 35%;
+
+  background:
+    rgba(30, 90, 255, 0.055);
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.hero-grid {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: -5;
+
+  pointer-events: none;
+
+  opacity: 0.09;
+
+  background-image:
+    linear-gradient(
+      rgba(0, 210, 255, 0.14) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(0, 210, 255, 0.14) 1px,
+      transparent 1px
+    );
+
+  background-size: 80px 80px;
+
+  /*
+    Mask dihapus.
+    Gradient sederhana lebih murah.
+  */
+
+  background-position: center;
+}
+
+
+/* =========================================================
+   VIGNETTE
+========================================================= */
+
+.hero-vignette {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: -4;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      transparent 50%,
+      rgba(0, 0, 0, 0.23) 100%
+    );
+}
+
+
+/* =========================================================
+   NOISE
+========================================================= */
+
+/*
+   Noise feTurbulence dihapus.
+
+   SVG feTurbulence + mix-blend-mode cukup berat
+   terutama ketika video juga berjalan.
+*/
+
+.hero-noise {
+  display: none;
+}
+
+
+/* =========================================================
+   TOP LINE
+========================================================= */
+
+.hero-top-line {
+  position: absolute;
+
+  top: 32px;
+
+  left: 7vw;
+  right: 7vw;
+
+  height: 1px;
+
+  z-index: 60;
+
+  display: flex;
+
+  background:
+    rgba(255, 255, 255, 0.15);
+}
+
+.hero-top-line span:nth-child(1) {
+  width: 18%;
+
+  background:
+    #00eaff;
+
+  box-shadow:
+    0 0 7px rgba(0, 234, 255, 0.55);
+}
+
+.hero-top-line span:nth-child(2) {
+  flex: 1;
+}
+
+.hero-top-line span:nth-child(3) {
+  width: 15%;
+
+  background:
+    #7785ff;
+
+  box-shadow:
+    0 0 7px rgba(100, 100, 255, 0.45);
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.hero-content {
+  position: relative;
+
+  z-index: 20;
+
+  width: 100%;
+
+  max-width: 820px;
+
+  min-width: 0;
+
+  padding:
+    24px 28px 26px;
+
+  margin-left: -28px;
+
+  border-left:
+    1px solid rgba(0, 220, 255, 0.22);
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 5, 12, 0.46),
+      rgba(0, 7, 14, 0.12),
+      transparent
+    );
+
+  border-radius:
+    0 18px 18px 0;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.hero-status {
+  display: flex;
+
+  align-items: center;
+
+  gap: 11px;
+
+  margin-bottom: 21px;
+
+  color:
+    rgba(245, 253, 255, 0.92);
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  letter-spacing: 2.5px;
+
+  text-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.9);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+
+  flex: 0 0 8px;
+
+  border-radius: 50%;
+
+  background: #00efff;
+
+  box-shadow:
+    0 0 7px #00efff,
+    0 0 14px rgba(0, 240, 255, 0.65);
+
+  animation:
+    statusPulse 1.8s infinite;
+
+  will-change:
+    transform,
+    opacity;
+}
+
+@keyframes statusPulse {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.45;
+    transform: scale(0.75);
+  }
+
+}
+
+.status-line {
+  width: 65px;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #00eaff,
+      transparent
+    );
+}
+
+.status-code {
+  opacity: 0.45;
+
+  margin-left: 5px;
+}
+
+
+/* =========================================================
+   HELLO
+========================================================= */
+
+.hero-small {
+  margin:
+    0 0 9px;
+
+  color:
+    rgba(242, 251, 255, 0.82);
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  letter-spacing: 5px;
+
+  text-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.95);
+}
+
+
+/* =========================================================
+   NAME
+========================================================= */
+
+.hero-name {
+  position: relative;
+
+  display: block;
+
+  width: 100%;
+
+  max-width: 790px;
+
+  margin: 0;
+
+  padding: 0;
+
+  overflow: visible;
+
+  font-family:
+    Inter,
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
+  font-size:
+    clamp(39px, 3.55vw, 68px);
+
+  line-height:
+    0.96;
+
+  letter-spacing:
+    -2.8px;
+
+  font-weight:
+    950;
+
+  text-transform:
+    uppercase;
+}
+
+
+/* =========================================================
+   NAME LINES
+========================================================= */
+
+.name-line {
+  display: block;
+
+  width: max-content;
+
+  max-width: 100%;
+
+  white-space: nowrap;
+
+  overflow: visible;
+
+  color: #ffffff;
+
+  background:
+    linear-gradient(
+      110deg,
+      #ffffff 0%,
+      #ffffff 24%,
+      #f4f8fb 42%,
+      #cbd7df 63%,
+      #ffffff 78%,
+      #b7f5ff 100%
+    );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+
+  /*
+    Shadow dikurangi dari 2 lapis besar menjadi
+    satu shadow yang lebih ringan.
+  */
+
+  filter:
+    drop-shadow(
+      0 4px 10px rgba(0, 0, 0, 0.65)
+    );
+
+  transform:
+    translateZ(0);
+}
+
+
+/* =========================================================
+   SECOND LINE
+========================================================= */
+
+.name-line-main {
+
+  margin-top:
+    8px;
+
+  background:
+    linear-gradient(
+      105deg,
+      #ffffff 0%,
+      #ffffff 30%,
+      #edf3f6 50%,
+      #d3dde3 67%,
+      #ffffff 82%,
+      #b9f5ff 100%
+    );
+
+  -webkit-background-clip:
+    text;
+
+  background-clip:
+    text;
+
+  -webkit-text-fill-color:
+    transparent;
+}
+
+
+/* =========================================================
+   NAME DECORATION
+========================================================= */
+
+.name-decoration {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  width: 100%;
+
+  max-width: 390px;
+
+  height: 10px;
+
+  margin-top: 12px;
+}
+
+.name-decoration-main {
+
+  width: 115px;
+
+  height: 2px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #00eaff,
+      rgba(0, 234, 255, 0.25),
+      transparent
+    );
+
+  box-shadow:
+    0 0 6px rgba(0, 234, 255, 0.3);
+}
+
+.name-decoration-small {
+
+  width: 35px;
+
+  height: 1px;
+
+  background:
+    rgba(255, 255, 255, 0.45);
+}
+
+.name-decoration-dot {
+
+  width: 4px;
+  height: 4px;
+
+  border-radius: 50%;
+
+  background:
+    #00eaff;
+
+  box-shadow:
+    0 0 6px #00eaff;
+}
+
+
+/* =========================================================
+   SPECIALTIES
+========================================================= */
+
+.hero-specialties {
+
+  display: flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 12px;
+
+  margin-top: 15px;
+
+  color:
+    #ffffff !important;
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  letter-spacing: 2px;
+
+  text-transform:
+    uppercase;
+
+  text-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.9);
+}
+
+.hero-specialties span {
+
+  color:
+    #ffffff !important;
+
+  -webkit-text-fill-color:
+    #ffffff !important;
+
+  opacity:
+    1 !important;
+}
+
+.hero-specialties .active {
+
+  color:
+    #ffffff !important;
+
+  -webkit-text-fill-color:
+    #ffffff !important;
+}
+
+.hero-specialties i {
+
+  color:
+    rgba(0, 225, 255, 0.6);
+
+  font-style:
+    normal;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.hero-description {
+
+  max-width: 640px;
+
+  margin:
+    20px 0 0;
+
+  color:
+    rgba(246, 251, 253, 0.88);
+
+  font-size:
+    14px;
+
+  line-height:
+    1.75;
+
+  font-weight:
+    500;
+
+  text-shadow:
+    0 2px 3px rgba(0, 0, 0, 0.95),
+    0 4px 12px rgba(0, 0, 0, 0.65);
+}
+
+.hero-description strong {
+
+  color:
+    #ffffff;
+
+  font-weight:
+    800;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.hero-buttons {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 12px;
+
+  margin-top:
+    27px;
+}
+
+.hero-buttons a {
+
+  position: relative;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content:
+    space-between;
+
+  gap: 35px;
+
+  min-width:
+    175px;
+
+  padding:
+    14px 17px;
+
+  border-radius:
+    5px;
+
+  text-decoration:
+    none;
+
+  font-size:
+    10px;
+
+  font-weight:
+    900;
+
+  letter-spacing:
+    1.5px;
+
+  text-transform:
+    uppercase;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+
+  /*
+    Browser tahu elemen ini akan berubah.
+  */
+
+  will-change:
+    transform;
+}
+
+.hero-buttons a:hover {
+
+  transform:
+    translateY(-3px);
+}
+
+
+/* =========================================================
+   PRIMARY
+========================================================= */
+
+.btn-primary {
+
+  color:
+    #001016;
+
+  background:
+    linear-gradient(
+      100deg,
+      #ffffff,
+      #00e5ff
+    );
+
+  box-shadow:
+    0 0 18px rgba(0, 220, 255, 0.25);
+}
+
+.btn-primary:hover {
+
+  box-shadow:
+    0 0 28px rgba(0, 225, 255, 0.45);
+}
+
+.btn-primary b {
+
+  font-size:
+    18px;
+
+  line-height:
+    1;
+}
+
+
+/* =========================================================
+   SECONDARY
+========================================================= */
+
+.btn-secondary {
+
+  color:
+    #ffffff;
+
+  border:
+    1px solid rgba(0, 235, 255, 0.6);
+
+  background:
+    rgba(0, 8, 15, 0.82);
+
+  /*
+    Backdrop blur dihilangkan.
+    Background tetap memberikan efek glass.
+  */
+
+  backdrop-filter:
+    none;
+
+  -webkit-backdrop-filter:
+    none;
+}
+
+.btn-secondary:hover {
+
+  border-color:
+    #00eaff;
+
+  background:
+    rgba(0, 20, 32, 0.9);
+
+  box-shadow:
+    0 0 18px rgba(0, 210, 255, 0.2);
+}
+
+.btn-secondary b {
+
+  font-size:
+    18px;
+
+  line-height:
+    1;
+}
+
+
+/* =========================================================
+   SKILLS
+========================================================= */
+
+.hero-skills {
+
+  display: flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-top:
+    27px;
+}
+
+.hero-skills span {
+
+  padding:
+    7px 10px;
+
+  border:
+    1px solid rgba(220, 245, 255, 0.18);
+
+  background:
+    rgba(0, 8, 15, 0.78);
+
+  color:
+    rgba(240, 251, 255, 0.78);
+
+  font-size:
+    8px;
+
+  font-weight:
+    800;
+
+  letter-spacing:
+    1.3px;
+
+  text-transform:
+    uppercase;
+
+  /*
+    Blur dihapus.
+  */
+
+  backdrop-filter:
+    none;
+
+  -webkit-backdrop-filter:
+    none;
+}
+
+.hero-skills .skill-label {
+
+  color:
+    #00edff;
+
+  border-color:
+    rgba(0, 230, 255, 0.5);
+
+  background:
+    rgba(0, 200, 255, 0.12);
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.hero-stats {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 22px;
+
+  margin-top:
+    28px;
+}
+
+.stat {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.stat strong {
+
+  color:
+    #ffffff;
+
+  font-size:
+    19px;
+
+  line-height:
+    1;
+
+  text-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.stat span {
+
+  color:
+    rgba(220, 244, 250, 0.58);
+
+  font-size:
+    7px;
+
+  font-weight:
+    800;
+
+  letter-spacing:
+    1.7px;
+}
+
+.stat-divider {
+
+  width:
+    1px;
+
+  height:
+    28px;
+
+  background:
+    linear-gradient(
+      to bottom,
+      transparent,
+      rgba(0, 225, 255, 0.7),
+      transparent
+    );
+}
+
+
+/* =========================================================
+   RIGHT VISUAL
+========================================================= */
+
+.hero-visual {
+
+  position:
+    relative;
+
+  z-index:
+    20;
+
+  min-width:
+    0;
+
+  width:
+    100%;
+
+  height:
+    min(720px, 75vh);
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+}
+
+
+/* =========================================================
+   PROFILE HALO
+========================================================= */
+
+.profile-halo {
+
+  position:
+    absolute;
+
+  width:
+    min(590px, 90%);
+
+  aspect-ratio:
+    1;
+
+  border-radius:
+    50%;
+
+  pointer-events:
+    none;
+
+  transform:
+    translateZ(0);
+}
+
+.halo-one {
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(0, 220, 255, 0.16),
+      transparent 62%
+    );
+
+  /*
+    20px -> 12px
+  */
+
+  filter:
+    blur(12px);
+}
+
+.halo-two {
+
+  width:
+    min(500px, 80%);
+
+  border:
+    1px solid rgba(0, 225, 255, 0.25);
+
+  box-shadow:
+    0 0 35px rgba(0, 210, 255, 0.08);
+
+  animation:
+    haloRotate 20s linear infinite;
+
+  will-change:
+    transform;
+}
+
+.halo-three {
+
+  width:
+    min(540px, 86%);
+
+  border:
+    1px dashed rgba(110, 140, 255, 0.28);
+
+  animation:
+    haloRotateReverse 26s linear infinite;
+
+  will-change:
+    transform;
+}
+
+@keyframes haloRotate {
+
+  from {
+    transform:
+      rotate(0deg);
+  }
+
+  to {
+    transform:
+      rotate(360deg);
+  }
+
+}
+
+@keyframes haloRotateReverse {
+
+  from {
+    transform:
+      rotate(360deg);
+  }
+
+  to {
+    transform:
+      rotate(0deg);
+  }
+
+}
+
+
+/* =========================================================
+   PROFILE FRAME
+========================================================= */
+
+.profile-frame {
+
+  position:
+    relative;
+
+  width:
+    min(470px, 78%);
+
+  aspect-ratio:
+    1 / 1;
+
+  padding:
+    5px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff,
+      #00eaff 25%,
+      #1167ff 58%,
+      #9468ff
+    );
+
+  box-shadow:
+    0 0 0 1px rgba(0, 225, 255, 0.3),
+    0 0 35px rgba(0, 200, 255, 0.18),
+    0 0 60px rgba(0, 100, 255, 0.10);
+
+  transform:
+    translateZ(0)
+    rotate(-1.5deg);
+
+  touch-action:
+    none;
+
+  cursor:
+    crosshair;
+
+  overflow:
+    hidden;
+}
+
+.profile-frame::before {
+
+  content:
+    "";
+
+  position:
+    absolute;
+
+  inset:
+    5px;
+
+  z-index:
+    2;
+
+  pointer-events:
+    none;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.3);
+}
+
+.profile-image {
+
+  position:
+    relative;
+
+  z-index:
+    1;
+
+  width:
+    100%;
+
+  height:
+    100%;
+
+  display:
+    block;
+
+  object-fit:
+    cover;
+
+  object-position:
+    center;
+
+  background:
+    #07121a;
+
+  filter:
+    saturate(1.04)
+    contrast(1.03);
+
+  /*
+    Hindari repaint yang tidak perlu.
+  */
+
+  backface-visibility:
+    hidden;
+}
+
+
+/* =========================================================
+   PROFILE GLOW
+========================================================= */
+
+.profile-glow {
+
+  position:
+    absolute;
+
+  inset:
+    -15px;
+
+  z-index:
+    -1;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(0, 230, 255, 0.45),
+      transparent 45%,
+      rgba(100, 80, 255, 0.45)
+    );
+
+  filter:
+    blur(20px);
+
+  opacity:
+    0.55;
+
+  pointer-events:
+    none;
+}
+
+
+/* =========================================================
+   PROFILE CORNERS
+========================================================= */
+
+.profile-corner {
+
+  position:
+    absolute;
+
+  width:
+    34px;
+
+  height:
+    34px;
+
+  z-index:
+    5;
+
+  pointer-events:
+    none;
+}
+
+.corner-one {
+
+  top:
+    -13px;
+
+  left:
+    -13px;
+
+  border-top:
+    2px solid #00efff;
+
+  border-left:
+    2px solid #00efff;
+
+  filter:
+    drop-shadow(0 0 4px #00efff);
+}
+
+.corner-two {
+
+  top:
+    -13px;
+
+  right:
+    -13px;
+
+  border-top:
+    2px solid #8190ff;
+
+  border-right:
+    2px solid #8190ff;
+}
+
+.corner-three {
+
+  bottom:
+    -13px;
+
+  left:
+    -13px;
+
+  border-bottom:
+    2px solid #00efff;
+
+  border-left:
+    2px solid #00efff;
+}
+
+.corner-four {
+
+  bottom:
+    -13px;
+
+  right:
+    -13px;
+
+  border-bottom:
+    2px solid #8190ff;
+
+  border-right:
+    2px solid #8190ff;
+}
+
+
+/* =========================================================
+   TECH BAR
+========================================================= */
+
+.profile-tech-bar {
+
+  position:
+    absolute;
+
+  top:
+    15px;
+
+  right:
+    15px;
+
+  z-index:
+    8;
+
+  display:
+    flex;
+
+  gap:
+    4px;
+
+  padding:
+    5px 7px;
+
+  background:
+    rgba(0, 7, 14, 0.9);
+
+  border:
+    1px solid rgba(0, 230, 255, 0.35);
+
+  /*
+    Blur dihapus.
+  */
+
+  backdrop-filter:
+    none;
+
+  -webkit-backdrop-filter:
+    none;
+}
+
+.profile-tech-bar span {
+
+  width:
+    12px;
+
+  height:
+    3px;
+
+  background:
+    #00eaff;
+
+  box-shadow:
+    0 0 5px rgba(0, 234, 255, 0.5);
+}
+
+.profile-tech-bar span:nth-child(2) {
+  opacity:
+    0.55;
+}
+
+.profile-tech-bar span:nth-child(3) {
+  opacity:
+    0.25;
+}
+
+
+/* =========================================================
+   FLOATING CARDS
+========================================================= */
+
+.floating-card {
+
+  position:
+    absolute;
+
+  z-index:
+    15;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    12px;
+
+  min-width:
+    220px;
+
+  padding:
+    13px 15px;
+
+  background:
+    rgba(1, 10, 18, 0.92);
+
+  border:
+    1px solid rgba(0, 225, 255, 0.35);
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.42),
+    0 0 18px rgba(0, 190, 255, 0.08);
+
+  /*
+    Backdrop blur dihilangkan.
+  */
+
+  backdrop-filter:
+    none;
+
+  -webkit-backdrop-filter:
+    none;
+
+  will-change:
+    transform;
+}
+
+.card-top {
+
+  top:
+    13%;
+
+  right:
+    2%;
+}
+
+.card-bottom {
+
+  bottom:
+    14%;
+
+  left:
+    1%;
+}
+
+.floating-icon {
+
+  width:
+    35px;
+
+  height:
+    35px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  flex:
+    0 0 35px;
+
+  border-radius:
+    8px;
+
+  color:
+    #001016;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff,
+      #00dfff
+    );
+
+  box-shadow:
+    0 0 14px rgba(0, 220, 255, 0.25);
+
+  font-size:
+    16px;
+}
+
+.floating-icon.purple {
+
+  color:
+    #ffffff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #4d7dff,
+      #9b67ff
+    );
+}
+
+.floating-label {
+
+  display:
+    block;
+
+  margin-bottom:
+    4px;
+
+  color:
+    rgba(215, 240, 250, 0.55);
+
+  font-size:
+    7px;
+
+  font-weight:
+    800;
+
+  letter-spacing:
+    1.5px;
+}
+
+.floating-card strong {
+
+  display:
+    block;
+
+  color:
+    #ffffff;
+
+  font-size:
+    11px;
+
+  text-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+
+/* =========================================================
+   SYSTEM STATUS
+========================================================= */
+
+.system-status {
+
+  position:
+    absolute;
+
+  right:
+    3%;
+
+  bottom:
+    5%;
+
+  z-index:
+    15;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    9px;
+
+  padding:
+    9px 12px;
+
+  background:
+    rgba(0, 7, 13, 0.92);
+
+  border:
+    1px solid rgba(0, 225, 255, 0.3);
+
+  /*
+    Blur dihapus.
+  */
+
+  backdrop-filter:
+    none;
+
+  -webkit-backdrop-filter:
+    none;
+}
+
+.system-dot {
+
+  width:
+    7px;
+
+  height:
+    7px;
+
+  border-radius:
+    50%;
+
+  background:
+    #00ffae;
+
+  box-shadow:
+    0 0 7px rgba(0, 255, 174, 0.7);
+}
+
+.system-status span {
+
+  display:
+    block;
+
+  color:
+    rgba(215, 240, 250, 0.48);
+
+  font-size:
+    6px;
+
+  letter-spacing:
+    1.5px;
+}
+
+.system-status strong {
+
+  display:
+    block;
+
+  margin-top:
+    2px;
+
+  color:
+    #9ffff0;
+
+  font-size:
+    9px;
+
+  letter-spacing:
+    1px;
+}
+
+.system-bars {
+
+  display:
+    flex;
+
+  align-items:
+    flex-end;
+
+  gap:
+    2px;
+
+  height:
+    14px;
+
+  margin-left:
+    8px;
+}
+
+.system-bars i {
+
+  width:
+    3px;
+
+  background:
+    #00dfff;
+
+  animation:
+    systemBars 1.2s infinite ease-in-out;
+
+  will-change:
+    opacity;
+}
+
+.system-bars i:nth-child(1) {
+  height:
+    5px;
+}
+
+.system-bars i:nth-child(2) {
+
+  height:
+    9px;
+
+  animation-delay:
+    0.1s;
+}
+
+.system-bars i:nth-child(3) {
+
+  height:
+    13px;
+
+  animation-delay:
+    0.2s;
+}
+
+.system-bars i:nth-child(4) {
+
+  height:
+    8px;
+
+  animation-delay:
+    0.3s;
+}
+
+.system-bars i:nth-child(5) {
+
+  height:
+    11px;
+
+  animation-delay:
+    0.4s;
+}
+
+@keyframes systemBars {
+
+  0%,
+  100% {
+    opacity:
+      0.3;
+  }
+
+  50% {
+    opacity:
+      1;
+  }
+
+}
+
+
+/* =========================================================
+   VISUAL LABEL
+========================================================= */
+
+.visual-label {
+
+  position:
+    absolute;
+
+  top:
+    4%;
+
+  left:
+    3%;
+
+  z-index:
+    15;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    9px;
+
+  color:
+    rgba(225, 245, 250, 0.55);
+
+  font-size:
+    7px;
+
+  font-weight:
+    800;
+
+  letter-spacing:
+    2px;
+}
+
+.visual-label strong {
+
+  color:
+    #00eaff;
+
+  font-size:
+    10px;
+
+  text-shadow:
+    0 0 7px rgba(0, 230, 255, 0.5);
+}
+
+
+/* =========================================================
+   SCROLL
+========================================================= */
+
+.hero-scroll {
+
+  position:
+    absolute;
+
+  left:
+    7vw;
+
+  bottom:
+    32px;
+
+  z-index:
+    60;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    12px;
+
+  color:
+    rgba(235, 250, 255, 0.6);
+
+  font-size:
+    7px;
+
+  font-weight:
+    800;
+
+  letter-spacing:
+    2px;
+}
+
+.scroll-line {
+
+  width:
+    45px;
+
+  height:
+    1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #00eaff,
+      transparent
+    );
+}
+
+.scroll-arrow {
+
+  color:
+    #00eaff;
+
+  font-size:
+    13px;
+
+  animation:
+    scrollArrow 1.8s infinite ease-in-out;
+
+  will-change:
+    transform;
+}
+
+@keyframes scrollArrow {
+
+  0%,
+  100% {
+    transform:
+      translateY(0);
+  }
+
+  50% {
+    transform:
+      translateY(5px);
+  }
+
+}
+
+
+/* =========================================================
+   PROFILE LENS REVEAL
+========================================================= */
+
+.profile-frame {
+  --lens-x: 50%;
+  --lens-y: 50%;
+  --lens-size: 85px;
+
+  touch-action: none;
+
+  cursor:
+    crosshair;
+
+  overflow:
+    hidden;
+}
+
+
+/* =========================================================
+   IMAGE 2
+========================================================= */
+
+.profile-image-reveal {
+
+  position:
+    absolute;
+
+  inset:
+    5px;
+
+  width:
+    calc(100% - 10px);
+
+  height:
+    calc(100% - 10px);
+
+  object-fit:
+    cover;
+
+  object-position:
+    center;
+
+  z-index:
+    3;
+
+  pointer-events:
+    none;
+
+  /*
+    Lingkaran tetap sama.
+  */
+
+  clip-path:
+    circle(
+      var(--lens-size)
+      at
+      var(--lens-x)
+      var(--lens-y)
+    );
+
+  opacity:
+    0;
+
+  transition:
+    opacity 0.12s ease;
+
+  filter:
+    saturate(1.06)
+    contrast(1.04);
+
+  /*
+    Posisi memang berubah terus,
+    jadi browser diberi tahu.
+  */
+
+  will-change:
+    clip-path,
+    opacity;
+
+  backface-visibility:
+    hidden;
+}
+
+
+/* =========================================================
+   LENS ACTIVE
+========================================================= */
+
+.profile-frame.lens-active
+.profile-image-reveal {
+  opacity:
+    1;
+}
+
+
+/* =========================================================
+   LENS CIRCLE
+========================================================= */
+
+.profile-lens {
+
+  position:
+    absolute;
+
+  left:
+    var(--lens-x);
+
+  top:
+    var(--lens-y);
+
+  width:
+    calc(var(--lens-size) * 2);
+
+  height:
+    calc(var(--lens-size) * 2);
+
+  transform:
+    translate(-50%, -50%);
+
+  z-index:
+    7;
+
+  pointer-events:
+    none;
+
+  border-radius:
+    50%;
+
+  border:
+    2px solid rgba(0, 238, 255, 0.95);
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(0, 238, 255, 0.05),
+      transparent 65%
+    );
+
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.18),
+    0 0 9px rgba(0, 238, 255, 0.7),
+    0 0 18px rgba(0, 210, 255, 0.32);
+
+  opacity:
+    0;
+
+  transition:
+    opacity 0.12s ease;
+
+  will-change:
+    left,
+    top,
+    opacity;
+}
+
+
+/* =========================================================
+   LENS ACTIVE
+========================================================= */
+
+.profile-frame.lens-active
+.profile-lens {
+  opacity:
+    1;
+}
+
+
+/* =========================================================
+   LENS INNER RING
+========================================================= */
+
+.profile-lens::before {
+
+  content:
+    "";
+
+  position:
+    absolute;
+
+  inset:
+    5px;
+
+  border-radius:
+    50%;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.4);
+
+  box-shadow:
+    inset 0 0 9px rgba(0, 230, 255, 0.14);
+
+  opacity:
+    0.8;
+}
+
+
+/* =========================================================
+   LENS CROSSHAIR
+========================================================= */
+
+.profile-lens::after {
+
+  content:
+    "";
+
+  position:
+    absolute;
+
+  left:
+    50%;
+
+  top:
+    50%;
+
+  width:
+    8px;
+
+  height:
+    8px;
+
+  transform:
+    translate(-50%, -50%);
+
+  border-radius:
+    50%;
+
+  background:
+    #00eaff;
+
+  box-shadow:
+    0 0 6px #00eaff,
+    0 0 12px rgba(0, 234, 255, 0.65);
+
+  opacity:
+    0.9;
+}
+
+
+/* =========================================================
+   LENS SIZE DESKTOP
+========================================================= */
+
+@media (min-width: 901px) {
+
+  .profile-frame {
+    --lens-size:
+      90px;
+  }
+
+}
+
+
+/* =========================================================
+   LENS SIZE TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .profile-frame {
+    --lens-size:
+      82px;
+  }
+
+}
+
+
+/* =========================================================
+   LENS SIZE MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .profile-frame {
+    --lens-size:
+      68px;
+  }
+
+  .profile-lens {
+    border-width:
+      1.5px;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+
+  .profile-frame {
+    --lens-size:
+      60px;
+  }
+
+}
+
+
+/* =========================================================
+   1400 PX
+========================================================= */
+
+@media (max-width: 1400px) {
+
+  .hero {
+
+    padding-left:
+      6vw;
+
+    padding-right:
+      6vw;
+  }
+
+  .hero-name {
+
+    font-size:
+      clamp(38px, 3.5vw, 63px);
+  }
+
+  .profile-frame {
+
+    width:
+      min(430px, 75%);
+  }
+
+}
+
+
+/* =========================================================
+   1200 PX
+========================================================= */
+
+@media (max-width: 1200px) {
+
+  .hero {
+
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(380px, 0.82fr);
+
+    gap:
+      25px;
+  }
+
+  .hero-content {
+
+    padding-left:
+      22px;
+
+    margin-left:
+      -22px;
+  }
+
+  .hero-name {
+
+    font-size:
+      clamp(35px, 3.7vw, 57px);
+
+    letter-spacing:
+      -2.3px;
+  }
+
+  .name-line {
+
+    width:
+      auto;
+
+    max-width:
+      100%;
+  }
+
+  .profile-frame {
+
+    width:
+      min(390px, 76%);
+  }
+
+}
+
+
+/* =========================================================
+   1000 PX
+========================================================= */
+
+@media (max-width: 1000px) {
+
+  .hero {
+
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(340px, 0.72fr);
+
+    gap:
+      15px;
+  }
+
+  .hero-name {
+
+    font-size:
+      clamp(32px, 3.8vw, 50px);
+
+    letter-spacing:
+      -2px;
+  }
+
+  .hero-description {
+
+    font-size:
+      13px;
+  }
+
+  .profile-frame {
+
+    width:
+      min(350px, 78%);
+  }
+
+  .floating-card {
+
+    transform:
+      scale(0.9);
+  }
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .hero {
+
+    min-height:
+      auto;
+
+    grid-template-columns:
+      1fr;
+
+    padding:
+      130px 7vw 100px;
+
+    gap:
+      65px;
+  }
+
+  .video-left-readable {
+
+    width:
+      100%;
+
+    background:
+      linear-gradient(
+        90deg,
+        rgba(0, 5, 11, 0.72),
+        rgba(0, 5, 11, 0.3),
+        transparent
+      );
+  }
+
+  .hero-content {
+
+    max-width:
+      760px;
+
+    padding:
+      22px;
+
+    margin-left:
+      0;
+
+    background:
+      linear-gradient(
+        90deg,
+        rgba(0, 5, 12, 0.58),
+        rgba(0, 7, 14, 0.25),
+        transparent
+      );
+
+    border-left:
+      1px solid rgba(0, 220, 255, 0.25);
+  }
+
+  .hero-name {
+
+    font-size:
+      clamp(42px, 8vw, 70px);
+  }
+
+  .name-line {
+
+    width:
+      max-content;
+
+    max-width:
+      100%;
+  }
+
+  .hero-visual {
+
+    height:
+      600px;
+  }
+
+  .profile-frame {
+
+    width:
+      min(450px, 72vw);
+  }
+
+  .hero-scroll {
+
+    display:
+      none;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .hero {
+
+    padding:
+      105px 22px 80px;
+
+    gap:
+      55px;
+  }
+
+  .hero-top-line {
+
+    left:
+      22px;
+
+    right:
+      22px;
+  }
+
+  .hero-content {
+
+    padding:
+      18px;
+
+    margin:
+      0 -5px;
+
+    border-radius:
+      0 14px 14px 0;
+  }
+
+  .hero-status {
+
+    font-size:
+      8px;
+
+    letter-spacing:
+      1.7px;
+  }
+
+  .status-line {
+
+    width:
+      35px;
+  }
+
+  .hero-small {
+
+    font-size:
+      10px;
+
+    letter-spacing:
+      3.5px;
+  }
+
+  .hero-name {
+
+    font-size:
+      clamp(31px, 9.5vw, 50px);
+
+    line-height:
+      0.98;
+
+    letter-spacing:
+      -1.8px;
+  }
+
+  .name-line {
+
+    width:
+      100%;
+
+    max-width:
+      100%;
+
+    white-space:
+      normal;
+  }
+
+  .name-line-main {
+
+    margin-top:
+      7px;
+  }
+
+  .name-decoration {
+
+    margin-top:
+      10px;
+  }
+
+  .hero-specialties {
+
+    gap:
+      8px;
+
+    font-size:
+      8px;
+
+    letter-spacing:
+      1.1px;
+  }
+
+  .hero-description {
+
+    margin-top:
+      18px;
+
+    font-size:
+      13px;
+
+    line-height:
+      1.7;
+  }
+
+  .hero-buttons {
+
+    margin-top:
+      25px;
+  }
+
+  .hero-buttons a {
+
+    min-width:
+      160px;
+
+    padding:
+      13px 14px;
+
+    gap:
+      20px;
+
+    font-size:
+      9px;
+  }
+
+  .hero-skills {
+
+    margin-top:
+      25px;
+  }
+
+  .hero-stats {
+
+    gap:
+      15px;
+
+    margin-top:
+      26px;
+  }
+
+  .stat strong {
+
+    font-size:
+      17px;
+  }
+
+  .stat span {
+
+    font-size:
+      7px;
+  }
+
+  .hero-visual {
+
+    height:
+      500px;
+  }
+
+  .profile-frame {
+
+    width:
+      min(390px, 82vw);
+  }
+
+  .floating-card {
+
+    min-width:
+      auto;
+
+    padding:
+      10px;
+
+    gap:
+      8px;
+  }
+
+  .floating-icon {
+
+    width:
+      30px;
+
+    height:
+      30px;
+
+    flex-basis:
+      30px;
+
+    font-size:
+      13px;
+  }
+
+  .floating-card strong {
+
+    font-size:
+      9px;
+  }
+
+  .floating-label {
+
+    font-size:
+      6px;
+  }
+
+  .card-top {
+
+    top:
+      8%;
+
+    right:
+      0;
+  }
+
+  .card-bottom {
+
+    bottom:
+      10%;
+
+    left:
+      0;
+  }
+
+  .system-status {
+
+    right:
+      0;
+
+    bottom:
+      0;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+
+  .hero {
+
+    padding-left:
+      17px;
+
+    padding-right:
+      17px;
+  }
+
+  .hero-name {
+
+    font-size:
+      29px;
+
+    letter-spacing:
+      -1.5px;
+  }
+
+  .hero-description {
+
+    font-size:
+      12px;
+  }
+
+  .hero-buttons {
+
+    flex-direction:
+      column;
+  }
+
+  .hero-buttons a {
+
+    width:
+      100%;
+  }
+
+  .hero-visual {
+
+    height:
+      430px;
+  }
+
+  .profile-frame {
+
+    width:
+      84vw;
+  }
+
+  .floating-card {
+
+    transform:
+      scale(0.88);
+  }
+
+  .card-top {
+
+    right:
+      -25px;
+  }
+
+  .card-bottom {
+
+    left:
+      -25px;
+  }
+
+  .system-status {
+
+    transform:
+      scale(0.88);
+
+    transform-origin:
+      right bottom;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .profile-halo,
+  .status-dot,
+  .system-bars i,
+  .scroll-arrow,
+  .floating-card {
+
+    animation:
+      none !important;
+  }
+
+  .hero-video-bg video {
+
+    transform:
+      none;
+  }
+
+  .profile-image-reveal,
+  .profile-lens {
+
+    transition:
+      none;
+  }
+
+}
+
+
+/* =========================================================
+   FINAL SPECIALTIES COLOR FIX
+========================================================= */
+
+.hero-specialties,
+.hero-specialties span,
+.hero-specialties b {
+
+  color:
+    #ffffff !important;
+
+  -webkit-text-fill-color:
+    #ffffff !important;
+
+  opacity:
+    1 !important;
+}

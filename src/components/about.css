@@ -1,0 +1,1146 @@
+/* =========================================================
+   ABOUT / EXPERIENCE
+   DARK BLUE + CYAN THEME
+========================================================= */
+
+.about {
+  position: relative;
+  width: 100%;
+  padding: 60px 7vw;
+  overflow: hidden;
+  background: transparent;
+}
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+.about::before {
+  content: "";
+  position: absolute;
+
+  width: 550px;
+  height: 550px;
+
+  top: 5%;
+  left: -300px;
+
+  background: radial-gradient(
+    circle,
+    rgba(0, 217, 255, 0.07) 0%,
+    rgba(0, 160, 255, 0.025) 35%,
+    transparent 72%
+  );
+
+  pointer-events: none;
+}
+
+.about::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    linear-gradient(
+      rgba(0, 217, 255, 0.012) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(0, 217, 255, 0.012) 1px,
+      transparent 1px
+    );
+
+  background-size: 80px 80px;
+
+  pointer-events: none;
+}
+
+.about-wrapper {
+  position: relative;
+  z-index: 2;
+
+  max-width: 1250px;
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.about-header {
+  max-width: 700px;
+  margin-bottom: 60px;
+}
+
+.about-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin-bottom: 22px;
+
+  color: #71818c;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  letter-spacing: 4px;
+}
+
+.label-line {
+  position: relative;
+
+  width: 35px;
+  height: 1px;
+
+  background: linear-gradient(
+    90deg,
+    #00d9ff,
+    rgba(0, 217, 255, 0.05)
+  );
+
+  box-shadow:
+    0 0 8px rgba(0, 217, 255, 0.35);
+}
+
+.about-header h2 {
+  margin: 0;
+
+  color: #f5f9fc;
+
+  font-size: clamp(
+    50px,
+    7vw,
+    92px
+  );
+
+  line-height: 0.95;
+
+  font-weight: 700;
+
+  letter-spacing: -5px;
+}
+
+.about-header h2 span {
+  color: transparent;
+
+  -webkit-text-stroke:
+    1px rgba(0, 217, 255, 0.45);
+
+  text-shadow:
+    0 0 25px rgba(0, 217, 255, 0.06);
+}
+
+.about-header p {
+  max-width: 550px;
+
+  margin-top: 30px;
+
+  color: #788690;
+
+  font-size: 15px;
+
+  line-height: 1.8;
+}
+
+
+/* =========================================================
+   TIMELINE
+========================================================= */
+
+.experience-container {
+  position: relative;
+}
+
+/* Main vertical line */
+
+.experience-container::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  bottom: 0;
+
+  left: 34px;
+
+  width: 1px;
+
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(0, 217, 255, 0.18) 10%,
+    rgba(0, 217, 255, 0.18) 90%,
+    transparent
+  );
+
+  box-shadow:
+    0 0 8px rgba(0, 217, 255, 0.08);
+}
+
+.experience-card {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns:
+    70px minmax(0, 1fr);
+
+  gap: 35px;
+
+  margin-bottom: 45px;
+}
+
+.experience-card:last-child {
+  margin-bottom: 0;
+}
+
+
+/* =========================================================
+   NUMBER
+========================================================= */
+
+.experience-index {
+  position: relative;
+
+  z-index: 2;
+
+  width: 68px;
+  height: 68px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(0, 217, 255, 0.05),
+      #070c10 72%
+    );
+
+  border:
+    1px solid rgba(0, 217, 255, 0.18);
+
+  box-shadow:
+    0 0 0 8px rgba(3, 8, 12, 0.85),
+    0 0 20px rgba(0, 217, 255, 0.025);
+
+  transition:
+    border-color 0.35s ease,
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.experience-index span {
+  color: #7a8790;
+
+  font-size: 13px;
+
+  letter-spacing: 1px;
+
+  transition:
+    color 0.3s ease,
+    text-shadow 0.3s ease;
+}
+
+.experience-card:hover .experience-index {
+  border-color: rgba(0, 217, 255, 0.65);
+
+  transform: rotate(8deg);
+
+  box-shadow:
+    0 0 0 8px rgba(3, 8, 12, 0.9),
+    0 0 25px rgba(0, 217, 255, 0.12);
+}
+
+.experience-card:hover .experience-index span {
+  color: #00d9ff;
+
+  text-shadow:
+    0 0 12px rgba(0, 217, 255, 0.5);
+}
+
+
+/* =========================================================
+   MAIN EXPERIENCE CARD
+========================================================= */
+
+.experience-main {
+  position: relative;
+
+  min-width: 0;
+
+  padding: 38px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.07);
+
+  border-radius: 24px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(0, 217, 255, 0.025),
+      rgba(255, 255, 255, 0.008)
+    );
+
+  backdrop-filter: blur(14px);
+
+  overflow: hidden;
+
+  transition:
+    border-color 0.4s ease,
+    background 0.4s ease,
+    box-shadow 0.4s ease,
+    transform 0.4s ease;
+}
+
+
+/* Top-right glow */
+
+.experience-main::before {
+  content: "";
+
+  position: absolute;
+
+  width: 320px;
+  height: 320px;
+
+  top: -200px;
+  right: -130px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(0, 217, 255, 0.09),
+      transparent 70%
+    );
+
+  pointer-events: none;
+
+  transition:
+    transform 0.6s ease;
+}
+
+
+/* Bottom glow */
+
+.experience-main::after {
+  content: "";
+
+  position: absolute;
+
+  width: 250px;
+  height: 250px;
+
+  bottom: -190px;
+  left: 15%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(0, 140, 255, 0.045),
+      transparent 70%
+    );
+
+  pointer-events: none;
+}
+
+.experience-card:hover .experience-main {
+  border-color:
+    rgba(0, 217, 255, 0.18);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(0, 217, 255, 0.04),
+      rgba(255, 255, 255, 0.01)
+    );
+
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.22),
+    0 0 35px rgba(0, 217, 255, 0.035);
+
+  transform:
+    translateY(-2px);
+}
+
+.experience-card:hover .experience-main::before {
+  transform: scale(1.2);
+}
+
+
+/* =========================================================
+   TOP / DATE
+========================================================= */
+
+.experience-top {
+  position: relative;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 12px;
+
+  margin-bottom: 18px;
+}
+
+.experience-period {
+  color: #6d7c86;
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  letter-spacing: 2px;
+
+  line-height: 1.7;
+}
+
+.experience-counter {
+  flex-shrink: 0;
+
+  color: #3f4d55;
+
+  font-size: 10px;
+
+  letter-spacing: 2px;
+
+  transition:
+    color 0.3s ease;
+}
+
+.experience-card:hover .experience-counter {
+  color: #00aeda;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.experience-main h3 {
+  position: relative;
+
+  margin: 0;
+
+  color: #f3f8fb;
+
+  font-size:
+    clamp(26px, 3vw, 40px);
+
+  line-height: 1.2;
+
+  font-weight: 600;
+
+  letter-spacing: -1.5px;
+
+  overflow-wrap: anywhere;
+
+  transition:
+    color 0.35s ease,
+    text-shadow 0.35s ease;
+}
+
+.experience-card:hover .experience-main h3 {
+  color: #00d9ff;
+
+  text-shadow:
+    0 0 24px rgba(0, 217, 255, 0.12);
+}
+
+.experience-main h4 {
+  position: relative;
+
+  margin: 12px 0 0;
+
+  color: #7c8991;
+
+  font-size: 14px;
+
+  font-weight: 400;
+
+  line-height: 1.7;
+
+  overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   DIVIDER
+========================================================= */
+
+.experience-divider {
+  position: relative;
+
+  width: 100%;
+  height: 1px;
+
+  margin: 28px 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 217, 255, 0.15),
+      rgba(255, 255, 255, 0.06),
+      transparent
+    );
+}
+
+
+/* =========================================================
+   TEXT + GALLERY
+========================================================= */
+
+.experience-layout {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr) 220px;
+
+  gap: 28px;
+
+  align-items: start;
+}
+
+.experience-details {
+  min-width: 0;
+}
+
+.experience-description {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 15px;
+}
+
+.experience-point {
+  display: grid;
+
+  grid-template-columns:
+    6px minmax(0, 1fr);
+
+  gap: 13px;
+
+  align-items: start;
+}
+
+.point-dot {
+  width: 5px;
+  height: 5px;
+
+  margin-top: 9px;
+
+  border-radius: 50%;
+
+  background: #53656f;
+
+  transition:
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.experience-card:hover .point-dot {
+  background: #00d9ff;
+
+  box-shadow:
+    0 0 10px rgba(0, 217, 255, 0.7);
+}
+
+.experience-point p {
+  margin: 0;
+
+  color: #7b878f;
+
+  font-size: 13px;
+
+  line-height: 1.85;
+
+  transition:
+    color 0.3s ease;
+}
+
+.experience-card:hover .experience-point p {
+  color: #9ba8b0;
+}
+
+
+/* =========================================================
+   IMAGE GALLERY
+========================================================= */
+
+.experience-gallery {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 9px;
+
+  align-content: start;
+}
+
+.gallery-image {
+  position: relative;
+
+  display: block;
+
+  width: 100%;
+
+  aspect-ratio: 1 / 1;
+
+  padding: 0;
+
+  overflow: hidden;
+
+  border:
+    1px solid rgba(0, 217, 255, 0.12);
+
+  border-radius: 12px;
+
+  background: #071116;
+
+  cursor: zoom-in;
+
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.gallery-image:first-child {
+  grid-column: 1 / -1;
+}
+
+.gallery-image img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  filter:
+    brightness(0.82)
+    saturate(0.9);
+
+  transition:
+    transform 0.5s ease,
+    opacity 0.4s ease,
+    filter 0.4s ease;
+}
+
+.gallery-image:hover {
+  border-color:
+    rgba(0, 217, 255, 0.45);
+
+  box-shadow:
+    0 0 20px rgba(0, 217, 255, 0.08);
+}
+
+.gallery-image:hover img {
+  transform: scale(1.07);
+
+  opacity: 0.82;
+
+  filter:
+    brightness(0.98)
+    saturate(1.05);
+}
+
+
+/* =========================================================
+   ZOOM BUTTON
+========================================================= */
+
+.gallery-zoom {
+  position: absolute;
+
+  right: 9px;
+  bottom: 9px;
+
+  display: flex;
+
+  width: 27px;
+  height: 27px;
+
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid rgba(0, 217, 255, 0.3);
+
+  border-radius: 50%;
+
+  background:
+    rgba(1, 9, 14, 0.78);
+
+  color: #00d9ff;
+
+  font-size: 14px;
+
+  opacity: 0;
+
+  transform:
+    translateY(4px);
+
+  transition:
+    0.3s ease;
+}
+
+.gallery-image:hover .gallery-zoom {
+  opacity: 1;
+
+  transform:
+    translateY(0);
+
+  box-shadow:
+    0 0 15px rgba(0, 217, 255, 0.12);
+}
+
+
+/* =========================================================
+   TAGS
+========================================================= */
+
+.experience-tags {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-top: 28px;
+}
+
+.experience-tags span {
+  padding: 8px 12px;
+
+  border:
+    1px solid rgba(0, 217, 255, 0.1);
+
+  border-radius: 50px;
+
+  background:
+    rgba(0, 217, 255, 0.015);
+
+  color: #687781;
+
+  font-size: 10px;
+
+  letter-spacing: 0.4px;
+
+  transition:
+    color 0.3s ease,
+    border-color 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.experience-tags span:hover {
+  color: #00d9ff;
+
+  border-color:
+    rgba(0, 217, 255, 0.4);
+
+  background:
+    rgba(0, 217, 255, 0.035);
+
+  box-shadow:
+    0 0 15px rgba(0, 217, 255, 0.06);
+}
+
+
+/* =========================================================
+   LIGHTBOX
+========================================================= */
+
+.image-lightbox {
+  position: fixed;
+
+  z-index: 9999;
+
+  inset: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  background:
+    rgba(1, 6, 10, 0.94);
+
+  backdrop-filter:
+    blur(14px);
+
+  animation:
+    lightboxFade 0.25s ease;
+}
+
+.image-lightbox::before {
+  content: "";
+
+  position: absolute;
+
+  width: 500px;
+  height: 500px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(0, 217, 255, 0.035);
+
+  filter:
+    blur(90px);
+
+  pointer-events: none;
+}
+
+.lightbox-content {
+  position: relative;
+
+  z-index: 2;
+
+  width: min(90vw, 780px);
+
+  max-height: 90vh;
+
+  padding: 12px;
+
+  border:
+    1px solid rgba(0, 217, 255, 0.16);
+
+  border-radius: 18px;
+
+  background:
+    #071116;
+
+  box-shadow:
+    0 0 60px rgba(0, 217, 255, 0.07);
+
+  animation:
+    lightboxUp 0.3s ease;
+}
+
+.lightbox-content > img {
+  display: block;
+
+  width: 100%;
+
+  max-height: 75vh;
+
+  aspect-ratio: 1 / 1;
+
+  object-fit: contain;
+
+  border-radius: 10px;
+
+  background:
+    #03090d;
+}
+
+
+/* =========================================================
+   LIGHTBOX CLOSE
+========================================================= */
+
+.lightbox-close {
+  position: absolute;
+
+  z-index: 5;
+
+  top: 20px;
+  right: 20px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 38px;
+  height: 38px;
+
+  border:
+    1px solid rgba(0, 217, 255, 0.25);
+
+  border-radius: 50%;
+
+  background:
+    rgba(0, 8, 12, 0.82);
+
+  color: #fff;
+
+  font-size: 27px;
+
+  cursor: pointer;
+
+  transition:
+    0.3s ease;
+}
+
+.lightbox-close:hover {
+  background: #00d9ff;
+
+  border-color: #00d9ff;
+
+  color: #031015;
+
+  box-shadow:
+    0 0 25px rgba(0, 217, 255, 0.3);
+}
+
+
+/* =========================================================
+   LIGHTBOX CAPTION
+========================================================= */
+
+.lightbox-caption {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding:
+    15px 5px 5px;
+
+  color: #dce7ec;
+
+  font-size: 13px;
+}
+
+.lightbox-caption small {
+  color: #00aeda;
+
+  font-size: 10px;
+
+  letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   ANIMATION
+========================================================= */
+
+@keyframes lightboxFade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes lightboxUp {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(12px)
+      scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+  .experience-layout {
+    grid-template-columns:
+      minmax(0, 1fr) 180px;
+
+    gap: 20px;
+  }
+
+  .experience-main {
+    padding: 28px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .about {
+    padding: 80px 5vw;
+  }
+
+  .about-header {
+    margin-bottom: 45px;
+  }
+
+  .about-header h2 {
+    font-size: 54px;
+
+    letter-spacing: -3px;
+  }
+
+  .experience-container::before {
+    left: 23px;
+  }
+
+  .experience-card {
+    grid-template-columns:
+      46px minmax(0, 1fr);
+
+    gap: 16px;
+
+    margin-bottom: 35px;
+  }
+
+  .experience-index {
+    width: 46px;
+    height: 46px;
+
+    box-shadow:
+      0 0 0 5px
+      rgba(3, 8, 12, 0.9);
+  }
+
+  .experience-main {
+    padding: 23px 18px;
+
+    border-radius: 18px;
+  }
+
+  .experience-main h3 {
+    font-size: 25px;
+
+    letter-spacing: -0.8px;
+  }
+
+  .experience-main h4 {
+    font-size: 13px;
+  }
+
+  .experience-layout {
+    grid-template-columns: 1fr;
+
+    gap: 25px;
+  }
+
+  .experience-gallery {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+
+    gap: 7px;
+  }
+
+  .gallery-image:first-child {
+    grid-column: auto;
+  }
+
+  .gallery-image {
+    border-radius: 9px;
+  }
+
+  .gallery-zoom {
+    right: 5px;
+    bottom: 5px;
+
+    width: 22px;
+    height: 22px;
+
+    font-size: 12px;
+
+    opacity: 1;
+
+    transform: none;
+  }
+
+  .experience-point p {
+    font-size: 13px;
+
+    line-height: 1.75;
+  }
+
+  .experience-counter {
+    display: none;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+
+  .about {
+    padding: 70px 16px;
+  }
+
+  .about-header h2 {
+    font-size: 44px;
+  }
+
+  .experience-card {
+    grid-template-columns:
+      36px minmax(0, 1fr);
+
+    gap: 12px;
+  }
+
+  .experience-container::before {
+    left: 18px;
+  }
+
+  .experience-index {
+    width: 36px;
+    height: 36px;
+  }
+
+  .experience-index span {
+    font-size: 10px;
+  }
+
+  .experience-main {
+    padding: 20px 14px;
+  }
+
+  .experience-main h3 {
+    font-size: 21px;
+  }
+
+  .experience-period {
+    font-size: 9px;
+
+    letter-spacing: 1px;
+  }
+
+  .experience-tags span {
+    padding: 7px 9px;
+
+    font-size: 9px;
+  }
+}
